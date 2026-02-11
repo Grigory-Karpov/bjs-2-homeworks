@@ -9,12 +9,10 @@ class PrintEditionItem {
     this.type = null;
   }
 
-  // Метод для улучшения состояния
   fix() {
     this.state *= 1.5;
   }
 
-  // Сеттер для контроля диапазона состояния
   set state(newState) {
     if (newState < 0) {
       this._state = 0;
@@ -25,7 +23,6 @@ class PrintEditionItem {
     }
   }
 
-  // Геттер для получения состояния
   get state() {
     return this._state;
   }
@@ -75,20 +72,17 @@ class Library {
     this.books = [];
   }
 
-  // Добавление книги, если она не слишком испорчена
   addBook(book) {
     if (book.state > 30) {
       this.books.push(book);
     }
   }
 
-  // Поиск книги по любому свойству
   findBookBy(type, value) {
-    const findedBook = this.books.find((item) => item[type] === value);
-    return findedBook || null;
+    const foundBook = this.books.find((item) => item[type] === value);
+    return foundBook || null;
   }
 
-  // Выдача книги читателю (удаление из библиотеки)
   giveBookByName(bookName) {
     const bookIndex = this.books.findIndex((item) => item.name === bookName);
     
@@ -101,54 +95,7 @@ class Library {
     return null;
   }
 }
-
-/* Задача №3. Журнал успеваемости (Дополнительная) */
-
-class Student {
-  constructor(name) {
-    this.name = name;
-    this.marks = {};
-  }
-
-  // Добавление оценки по предмету
-  addMark(mark, subject) {
-    if (mark < 2 || mark > 5) {
-      return;
-    }
-
-    if (!this.marks.hasOwnProperty(subject)) {
-      this.marks[subject] = [];
-    }
-
-    this.marks[subject].push(mark);
-  }
-
-  // Средний балл по конкретному предмету
-  getAverageBySubject(subject) {
-    if (!this.marks.hasOwnProperty(subject) || this.marks[subject].length === 0) {
-      return 0;
-    }
-
-    const sum = this.marks[subject].reduce((acc, curr) => acc + curr, 0);
-    return sum / this.marks[subject].length;
-  }
-
-  // Общий средний балл по всем предметам
-  getAverage() {
-    const subjects = Object.keys(this.marks);
-    
-    if (subjects.length === 0) {
-      return 0;
-    }
-
-    const totalAverage = subjects.reduce((acc, subject) => {
-      return acc + this.getAverageBySubject(subject);
-    }, 0);
-
-    return totalAverage / subjects.length;
   }
 }
-    return null;
-  }
-}
+
 
